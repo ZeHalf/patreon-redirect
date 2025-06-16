@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Redirecting…</title>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+      
+      if (code) {
+        window.location.href = `intent://auth#Intent;scheme=clickerapp;S.code=${code};end`;
+      } else {
+        document.body.innerText = "No code found in URL.";
+      }
+    </script>
+  </head>
+  <body>
+    Redirecting to the app…
+  </body>
+</html>
