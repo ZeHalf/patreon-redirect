@@ -5,25 +5,25 @@
   <title>Redirecting...</title>
   <script>
     window.onload = () => {
-      const hashParams = new URLSearchParams(window.location.hash.substring(1));
-      const token = hashParams.get("access_token");
+      const query = new URLSearchParams(window.location.search);
+      const code = query.get("code");
 
-      if (!token) {
-        document.body.innerText = "Error: access_token not found in URL.";
+      if (!code) {
+        document.body.innerText = "Error: parameter 'code' not found.";
         return;
       }
 
       const isAndroid = /Android/i.test(navigator.userAgent);
 
       if (isAndroid) {
-        window.location.href = `clickerapp://auth?access_token=${token}`;
+        window.location.href = `clickerapp://auth?code=${code}`;
       } else {
-        window.location.href = `http://localhost:12345/?access_token=${token}`;
+        window.location.href = `http://localhost:12345/?code=${code}`;
       }
     };
   </script>
 </head>
 <body>
-  Wait, please... Redirecting to the app...
+  Please wait... Redirecting back to the app.
 </body>
 </html>
