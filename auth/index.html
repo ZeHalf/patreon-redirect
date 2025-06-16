@@ -5,24 +5,20 @@
   <title>Redirecting...</title>
   <script>
     window.onload = () => {
-      const query = new URLSearchParams(window.location.search);
-      const code = query.get("code");
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      const token = hashParams.get("access_token");
 
-      if (!code) {
-        document.body.innerText = "Error: parameter code is not found.";
+      if (!token) {
+        document.body.innerText = "Error: access_token not found in URL.";
         return;
       }
 
-      // Проверка на Android
       const isAndroid = /Android/i.test(navigator.userAgent);
 
-      // Выбираем схему редиректа в зависимости от платформы
       if (isAndroid) {
-        // Unity Android будет перехватывать через intent-filter на myapp://oauth
-        window.location.href = `clickerapp://auth?code=${code}`;
+        window.location.href = `clickerapp://auth?access_token=${token}`;
       } else {
-        // ПК-версия Unity слушает локальный сервер
-        window.location.href = `http://localhost:12345/?code=${code}`;
+        window.location.href = `http://localhost:12345/?access_token=${token}`;
       }
     };
   </script>
