@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting...</title>
+  <script>
+    window.onload = () => {
+      const params = new URLSearchParams(window.location.search);
+      const code = params.get("code");
+
+      if (!code) {
+        document.body.innerText = "Error: No code found.";
+        return;
+      }
+
+      if (window.opener) {
+        window.opener.postMessage({
+          type: "patreon_code",
+          code: code
+        }, "*");
+        document.body.innerHTML = "<h2>Success! You can return to the game.</h2>";
+      } else {
+        document.body.innerText = "Error: No opener window.";
+      }
+    };
+  </script>
+</head>
+<body>
+  Please wait, redirecting to your game...
+</body>
+</html>
