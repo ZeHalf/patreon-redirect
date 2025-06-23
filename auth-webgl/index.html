@@ -7,7 +7,8 @@
     window.onload = () => {
       const params = new URLSearchParams(window.location.search);
       const code = params.get("code");
-
+      console.log("Opener:", window.opener);
+      
       if (!code) {
         document.body.innerText = "Error: No code found.";
         return;
