@@ -7,8 +7,6 @@
     window.onload = () => {
       const params = new URLSearchParams(window.location.search);
       const code = params.get("code");
-      console.log("Opener:", window.opener);
-      alert("Opener: " + window.opener);
       
       if (!code) {
         document.body.innerText = "Error: No code found.";
@@ -16,16 +14,12 @@
       }
 
       if (window.opener) {
-        console.log("Sending postMessage to Unity with code:", code);
-        alert("Sending postMessage to Unity with code: " + code);
         window.opener.postMessage({
           type: "patreon_code",
           code: code
         }, "*");
         document.body.innerHTML = "<h2>Success! You can return to the game.</h2>";
       } else {
-        console.error("window.opener is null!");
-        alert("window.opener is null!");
         document.body.innerText = "Error: No opener window.";
       }
     };
