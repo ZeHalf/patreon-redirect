@@ -15,12 +15,14 @@
       }
 
       if (window.opener) {
+        console.log("Sending postMessage to Unity with code:", code);
         window.opener.postMessage({
           type: "patreon_code",
           code: code
         }, "*");
         document.body.innerHTML = "<h2>Success! You can return to the game.</h2>";
       } else {
+        console.error("window.opener is null!");
         document.body.innerText = "Error: No opener window.";
       }
     };
