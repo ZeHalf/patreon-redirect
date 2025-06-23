@@ -17,7 +17,7 @@
         window.opener.postMessage({
           type: "patreon_code",
           code: code
-        }, "http://localhost:52169/");
+        }, "https://localhost:4430/");
         document.body.innerHTML = "<h2>Success! You can return to the game.</h2>";
       } else {
         document.body.innerText = "Error: No opener window.";
